@@ -6,7 +6,7 @@ func main() {
 	recipe := map[string]int{"flour": 500, "sugar": 200, "eggs": 1}
 	available := map[string]int{"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200}
 
-	fmt.Println(Cakes(recipe, available))
+	fmt.Println(CackesRecursive(recipe, available))
 }
 
 func Cakes(recipe, available map[string]int) int {
@@ -29,4 +29,16 @@ func Cakes(recipe, available map[string]int) int {
 	}
 
 	return mina
+}
+
+func CackesRecursive(recipe, available map[string]int) int {
+	for k, v := range recipe { 
+		available[k] -= v
+
+		if 0 > available[k] {
+			return 0
+		}
+	}
+
+	return 1 + CackesRecursive(recipe, available)
 }
